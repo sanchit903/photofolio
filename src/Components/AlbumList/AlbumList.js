@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import Spinner from "react-spinner-material";
 import styles from './AlbumList.module.css';
 import { collection, onSnapshot } from 'firebase/firestore';
 import { db } from '../../FirebaseInit';
@@ -8,6 +9,7 @@ import AlbumForm from '../AlbumFrom/AlbumForm';
 export default function AlbumList({value}) {
     const [albums, setAlbums] = useState([]);
     const [showForm, setShowForm] = useState(false);
+    const [loading, setLoading] = useState(false);
     const { showAlbums, setShowAlbums, showImages, setShowImages, setSelectedAlbum } = value;
 
     useEffect(() => {
@@ -19,7 +21,7 @@ export default function AlbumList({value}) {
                 };
             });
             setAlbums(albums);
-            // console.log(albums);
+            setLoading(false);
         });
         return () => unsub();
     }, []);
@@ -45,14 +47,20 @@ export default function AlbumList({value}) {
                     </button>
                 </div>
             </div>
-            <div className={styles.albumsList_albumsList}>
-                {albums.map((album) => (
-                    <div className={styles.albumsList_album} key={album.id} onClick={(e) => showImageList(e, album)}>
-                        <img src="/assets/photos.png" alt="photos" />
-                        <span>{album.name}</span>
-                    </div>
-                ))}
-            </div>
+            {loading ? (
+                <div>
+                    <Spinner size={120} spinnerColor={"#333"} spinnerWidth={2} visible={true} />
+                </div>
+            ) : (
+                <div className={styles.albumsList_albumsList}>
+                    {albums.map((album) => (
+                        <div className={styles.albumsList_album} key={album.id} onClick={(e) => showImageList(e, album)}>
+                            <img src="/assets/photos.png" alt="photos" />
+                            <span>{album.name}</span>
+                        </div>
+                    ))}
+                </div>
+            )}
         </div>
     );
 }

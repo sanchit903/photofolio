@@ -4,6 +4,7 @@ import ImageForm from '../ImageForm/ImageForm';
 import { arrayRemove, doc, getDoc, updateDoc } from 'firebase/firestore';
 import { db } from '../../FirebaseInit';
 import { toast } from 'react-toastify';
+import Spinner from 'react-spinner-material';
 
 export default function ImageList({ value }) {
     const { showAlbums, setShowAlbums, showImages, setShowImages, selectedAlbum } = value;
@@ -17,13 +18,15 @@ export default function ImageList({ value }) {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [searchQuery, setSearchQuery] = useState('');
     const [filteredImages, setFilteredImages] = useState(images);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        setLoading(true);
         if (selectedAlbum?.Images) {
             setImages(selectedAlbum.Images);
             setFilteredImages(selectedAlbum.Images);
         }
-        // console.log(selectedAlbum)
+        setLoading(false);
     }, [selectedAlbum, images]);
 
     const albumRef = doc(db, 'albums', selectedAlbum.id);
@@ -153,41 +156,47 @@ export default function ImageList({ value }) {
                     {showForm ? "Cancel" : "Add image"}
                 </button>
             </div>
-            <div className={styles.imageList_imageList}>
-                {filteredImages.length !== 0 &&
-                    filteredImages.map((image, index) => (
-                        <div
-                            key={index}
-                            className={styles.imageList_image}
-                            onMouseEnter={handleMouseEnter}
-                            onMouseLeave={handleMouseLeave}
-                            onClick={() => openCarousel(index)}
-                        >
+            {loading ? (
+                <div>
+                    <Spinner size={120} spinnerColor={"#333"} spinnerWidth={2} visible={true} />
+                </div>
+            ) : (
+                <div className={styles.imageList_imageList}>
+                    {filteredImages.length !== 0 &&
+                        filteredImages.map((image, index) => (
                             <div
-                                className={`${styles.imageList_update} ${hovered ? styles.imageList_active : "false"
-                                    }`}
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    openImageForm("update", image);
-                                }}
+                                key={index}
+                                className={styles.imageList_image}
+                                onMouseEnter={handleMouseEnter}
+                                onMouseLeave={handleMouseLeave}
+                                onClick={() => openCarousel(index)}
                             >
-                                <img src="/assets/edit.png" alt="update" />
+                                <div
+                                    className={`${styles.imageList_update} ${hovered ? styles.imageList_active : "false"
+                                        }`}
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        openImageForm("update", image);
+                                    }}
+                                >
+                                    <img src="/assets/edit.png" alt="update" />
+                                </div>
+                                <div
+                                    className={`${styles.imageList_delete} ${hovered ? styles.imageList_active : "false"
+                                        }`}
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        deleteImage(e, image);
+                                    }}
+                                >
+                                    <img src="/assets/trash-bin.png" alt="delete" />
+                                </div>
+                                <img src={image.image} alt={image.title} />
+                                <span>{image.title}</span>
                             </div>
-                            <div
-                                className={`${styles.imageList_delete} ${hovered ? styles.imageList_active : "false"
-                                    }`}
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    deleteImage(e, image);
-                                }}
-                            >
-                                <img src="/assets/trash-bin.png" alt="delete" />
-                            </div>
-                            <img src={image.image} alt={image.title} />
-                            <span>{image.title}</span>
-                        </div>
-                    ))}
-            </div>
+                        ))}
+                </div>
+            )}
         </>
     );
 }
