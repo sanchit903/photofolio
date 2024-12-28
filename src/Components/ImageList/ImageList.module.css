@@ -1,0 +1,161 @@
+.imageList_top {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin-block: 30px;
+}
+
+.imageList_top span {
+    align-items: center;
+    aspect-ratio: 1;
+    background-color: #fcfcfc;
+    border-radius: 50%;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, .24);
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    margin-right: 30px;
+    width: 50px;
+}
+
+.imageList_top span img {
+    width: 30px;
+}
+
+.imageList_top h3 {
+    font-size: 1.7rem;
+    font-weight: 700;
+}
+
+.imageList_search {
+    align-items: center;
+    display: flex;
+    gap: 10px;
+    margin-left: auto;
+    margin-right: 30px;
+}
+
+.imageList_search input {
+    font-size: 1.1rem;
+    font-weight: 300;
+    outline: none;
+    padding: 5px 5px 5px 10px;
+}
+
+.imageList_search img {
+    cursor: pointer;
+    width: 30px;
+}
+
+.imageList_top button {
+    background-color: rgba(0, 119, 255, .1);
+    border: 2px solid #07f;
+    border-radius: 5px;
+    color: #07f;
+    cursor: pointer;
+    font-weight: 700;
+    outline: none;
+    padding: 5px 10px;
+}
+
+.imageList_top .imageList_active {
+    background-color: rgba(255, 19, 0, .1);
+    border: 2px solid #ff1300;
+    color: #ff1300;
+}
+
+.imageList_imageList {
+    grid-gap: 20px;
+    display: grid;
+    gap: 20px;
+    grid-auto-flow: row;
+    grid-auto-rows: 150px;
+    grid-template: repeat(1, 150px) / repeat(auto-fit, minmax(175px, .5fr));
+    margin-bottom: 50px;
+}
+
+.imageList_image {
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 8px 0 rgba(99, 99, 99, .2);
+    box-sizing: border-box;
+    cursor: pointer;
+    height: 100%;
+    padding: 10px;
+    position: relative;
+    width: 100%;
+}
+
+.imageList_update {
+    right: 30px;
+}
+
+.imageList_delete,
+.imageList_update {
+    border: none;
+    display: none;
+    outline: none;
+    position: absolute;
+    right: -15px;
+    top: -15px;
+    transition: .3s;
+}
+
+.imageList_image:hover .imageList_update,
+.imageList_image:hover .imageList_delete {
+    display: block;
+}
+
+.imageList_update {
+    right: 30px;
+    top: -15px;
+}
+
+.imageList_delete img,
+.imageList_update img {
+    width: 35px;
+}
+
+.imageList_image>img {
+    height: 80%;
+    object-fit: cover;
+    width: 100%;
+}
+
+.carousel {
+    align-items: center;
+    background-color: rgba(0, 0, 0, .5);
+    display: flex;
+    gap: 30px;
+    inset: 0;
+    justify-content: center;
+    position: fixed;
+    z-index: 999;
+}
+
+.carousel button {
+    align-items: center;
+    aspect-ratio: 1;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    font-size: 1.6rem;
+    font-weight: 800;
+    justify-content: center;
+    outline: none;
+    transition: .3s;
+    width: 60px;
+}
+
+.carousel button:first-of-type {
+    position: absolute;
+    right: 50px;
+    top: 50px;
+}
+
+.carousel img {
+    height: 80%;
+    object-fit: cover;
+    width: 60vw;
+}

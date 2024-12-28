@@ -1,24 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import NavBar from "./Components/NavBar/Navbar";
+import AlbumList from "./Components/AlbumList/AlbumList";
+import './index.css';
+import { useState } from "react";
+import ImageList from "./Components/ImageList/ImageList";
 
 function App() {
+  const [showAlbums, setShowAlbums] = useState(true);
+  const [showImages, setShowImages] = useState(false);
+  const [selectedAlbum, setSelectedAlbum] = useState(null);
+  const sharedProps = { showAlbums, setShowAlbums, showImages, setShowImages, selectedAlbum, setSelectedAlbum };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <NavBar />
+      <div className="App_content">
+        {showAlbums && <AlbumList value={sharedProps} />}
+        {showImages && <ImageList value={sharedProps} />}
+      </div>
+    </>
   );
 }
 

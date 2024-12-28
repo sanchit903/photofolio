@@ -1,0 +1,83 @@
+.title span {
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.albumsList_top {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+.albumsList_top h3 {
+    font-size: 1.7rem;
+    font-weight: 700;
+}
+
+.albumsList_top button {
+    background-color: rgba(0, 119, 255, .1);
+    border: 2px solid #07f;
+    border-radius: 5px;
+    color: #07f;
+    cursor: pointer;
+    font-weight: 700;
+    outline: none;
+    padding: 5px 10px;
+}
+
+.albumsList_top .albumsList_active {
+    background-color: rgba(255, 19, 0, .1);
+    border: 2px solid #ff1300;
+    color: #ff1300;
+}
+
+.albumsList_albumsList {
+    grid-gap: 30px;
+    display: grid;
+    gap: 30px;
+    grid-auto-flow: row;
+    grid-auto-rows: 150px;
+    grid-template: repeat(1, 150px) / repeat(auto-fit, minmax(150px, .5fr));
+    margin-bottom: 100px;
+}
+
+.albumsList_album {
+    align-items: center;
+    border: 5px solid #eee;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: flex-end;
+    margin-block: 30px;
+    transition: border-color .3s;
+    width: 100%;
+}
+
+.albumsList_album:hover {
+    border: 5px solid #07f;
+}
+
+.albumsList_album:hover span {
+    background-color: #07f;
+    color: white;
+}
+
+.albumsList_album img {
+    margin-bottom: 30px;
+    width: 50px;
+}
+
+.albumsList_album span {
+    background-color: #eee;
+    font-size: 1.1rem;
+    font-weight: 700;
+    justify-self: baseline;
+    padding-block: 5px;
+    text-align: center;
+    transition: .3s;
+    width: 100%;
+}
