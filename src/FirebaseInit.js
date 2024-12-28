@@ -7,12 +7,12 @@ import { getFirestore } from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBPH4zrOG0fREdjh-U8hIDLc_tITHAWerk",
-  authDomain: "photofolio-app-feac3.firebaseapp.com",
-  projectId: "photofolio-app-feac3",
-  storageBucket: "photofolio-app-feac3.firebasestorage.app",
-  messagingSenderId: "304748534005",
-  appId: "1:304748534005:web:3135ed3ff3f917be064dbc",
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID,
 };
 
 // Initialize Firebase
